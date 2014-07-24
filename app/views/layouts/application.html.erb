@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Ticketee</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+	<head>
+  	<title>Ticketee</title>
+	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
 
-	<% flash.each do |key, value| %>
-		<div class='flash'>
-			<%= value %>
-		</div>
-	<% end %>
+		<% if flash[:notice] %>
 
-	<%= yield %>
+			<div class='flash'>
+				<%= flash[:notice] %>
+			</div>
 
-</body>
+		<% end %>
+
+
+
+		<%= yield %>
+
+
+
+	</body>
 </html>
