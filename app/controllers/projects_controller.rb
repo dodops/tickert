@@ -10,18 +10,18 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
-	def create
-		@project = Project.new(project_params)
+  def create
+    @project = Project.new(project_params)
 
-		if @project.save
-			flash[:notice] = "Project has been created."
-			redirect_to @project
-		end
-	end
+    if @project.save
+      flash[:notice] = "Project has been created."
+      redirect_to @project
+    end
+  end
 
-	private
+  private
 
-	def project_params
-		params.require(:project).permit(:name, :description)
-	end
+  def project_params
+    params.require(:project).permit(:name, :description)
+  end
 end
