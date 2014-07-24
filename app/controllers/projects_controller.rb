@@ -1,7 +1,6 @@
 class ProjectsController < ApplicationController
 	def index	
 	end
-	
 
 	def show
 		@project = Project.find(params[:id])
@@ -21,7 +20,6 @@ class ProjectsController < ApplicationController
 	end
 
 	private
-
 
 	def project_params
 		params.require(:project).permit(:name, :description)
