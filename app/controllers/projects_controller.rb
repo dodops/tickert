@@ -2,9 +2,6 @@ class ProjectsController < ApplicationController
 	def index	
 	end
 
-	def destroy
-	end
-
 	def show
 		@project = Project.find(params[:id])
 	end
@@ -19,7 +16,6 @@ class ProjectsController < ApplicationController
 		if @project.save
 			flash[:notice] = "Project has been created."
 			redirect_to @project
-		else
 		end
 	end
 
