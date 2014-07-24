@@ -2,6 +2,9 @@ class ProjectsController < ApplicationController
 	def index	
 	end
 
+	def destroy
+	end
+
 	def show
 		@project = Project.find(params[:id])
 	end
