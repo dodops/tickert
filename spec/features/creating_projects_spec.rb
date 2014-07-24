@@ -11,5 +11,6 @@ feature 'Creating Projects' do
 		click_button 'Create Project'
 
 		expect(page).to have_content('Project has been created.')
+		
 	end
 end
