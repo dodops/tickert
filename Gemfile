@@ -28,8 +28,8 @@ gem 'spring',        group: :development
 
 group :test, :development do
 	gem 'rspec-rails'
+	gem 'capybara'
 end
-gem 'capybara', group: :test
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'Creating Projects' do
 	scenario 'can create a project' do
