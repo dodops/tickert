@@ -11,6 +11,10 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
+  def edit
+    @project = Project.find(params[:id])
+  end
+
   def create
     @project = Project.new(project_params)
 
@@ -20,6 +24,14 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Project has not been created."
       render :new
     end
+  end
+
+  def update
+    @project = Project.find(params[:id])
+    @project.update(project_params)
+
+    flash[:notice] = "Project has been updated."
+    redirect_to @project
   end
 
   private
