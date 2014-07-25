@@ -18,4 +18,15 @@ feature 'Creating Projects' do
     title = ("TextMate 2")
     expect(page).to have_title(title)
   end
+
+  scenario 'can not create a project' do
+    visit '/'
+
+    click_link 'New Project' 
+
+    click_button 'Create Project'
+
+    expect(page).to have_content('Project has not been created.')
+    expect(page).to have_content("Name can't be blank")
+  end
 end
