@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html>
-	<head>
+  <head>
     <title><%= content_for?(:title) ? yield(:title) : "Ticketee" %></title>
-	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-	  <%= csrf_meta_tags %>
-	</head>
-	<body>
-
-		<% if flash[:notice]  %>
-
-			<div class='flash'>
-				<%= flash[:notice]  %>
-			</div>
-
-		<% end %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <% if flash[:notice]  %>
+      <div class='flash'>
+        <%= flash[:notice]  %>
+      </div>
+    <% end %>
 
 
-
-		<%= yield %>
-
+    <%= yield %>
 
 
-	</body>
+  </body>
 </html>
