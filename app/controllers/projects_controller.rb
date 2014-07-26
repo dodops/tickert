@@ -1,10 +1,11 @@
 class ProjectsController < ApplicationController
+  before_action :find_project, only: [:show, :update, :edit]
+
   def index	
     @projects = Project.all
   end
 
   def show
-    @project = Project.find(params[:id])
   end
 
   def new
@@ -12,7 +13,6 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
   end
 
   def create
@@ -27,7 +27,6 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:id])
     @project.update(project_params)
 
     flash[:notice] = "Project has been updated."
@@ -35,6 +34,10 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def find_project
+    @project = Project.find(params[:id])
+  end
 
   def project_params
     params.require(:project).permit(:name, :description)
