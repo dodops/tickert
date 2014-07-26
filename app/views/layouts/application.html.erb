@@ -19,7 +19,9 @@
     <% end %>
 
 
-    <%= yield %>
+    <div class=row>
+      <div class="small-8 columns" role="content"><%= yield %></div>
+    </div>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
   </body>
 </html>
