@@ -8,4 +8,10 @@ RSpec.describe ProjectsController, :type => :controller do
     message = "The project you were looking for could not be found."
     expect(flash[:notice]).to eql(message)
   end
+
+
+  it "renders the right template" do
+    get :index
+    expect(response).to render_template('index')
+  end
 end
