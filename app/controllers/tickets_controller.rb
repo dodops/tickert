@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   before_action :find_project
   before_action :find_ticket, only: [:show, :edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :handle_error
 
   def new
     @ticket = @project.tickets.build
@@ -40,6 +41,11 @@ class TicketsController < ApplicationController
   end
 
   private
+  
+  def handle_error
+    flash[:notice] = "Could not be found."
+    redirect_to projects_path
+  end
 
   def ticket_params
     params.require(:ticket).permit(:title, :description)
