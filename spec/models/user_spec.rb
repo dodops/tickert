@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  describe "creating a user" do
+  describe ".create" do
+
     context "with a invalid attribute" do
-      it "must fail" do
+      it {
         user = User.new(name: "Douglas")
 
         user.save
@@ -13,16 +14,16 @@ RSpec.describe User, :type => :model do
         user.password_confirmation = ""
         user.save
         expect(user).to_not be_valid
-      end
+      }
     end
 
     context "with valid attributes" do
-      it "must be ok" do
+      it { 
         user = User.create(name: "Douglas", password: "hunter", password_confirmation: "hunter")
         user.save
 
         expect(user).to be_valid
-      end
+      }
     end
   end
 
