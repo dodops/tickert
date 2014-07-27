@@ -2,9 +2,19 @@ class TicketsController < ApplicationController
   before_action :find_project
   before_action :find_ticket, only: [:show, :edit, :update, :destroy]
 
-
   def new
     @ticket = @project.tickets.build
+  end
+
+  def create
+    @ticket = @project.tickets.build(ticket_params)
+    if @ticket.save
+      flash[:notice] = "Ticket has been created."
+      redirect_to [@project, @ticket]
+    else
+      flash[:notice] = "Ticket has not been created."
+      render 'new'
+    end
   end
 
   def edit
@@ -21,17 +31,6 @@ class TicketsController < ApplicationController
   end
 
   def show
-  end
-
-  def create
-    @ticket = @project.tickets.build(ticket_params)
-    if @ticket.save
-      flash[:notice] = "Ticket has been created."
-      redirect_to [@project, @ticket]
-    else
-      flash[:notice] = "Ticket has not been created."
-      render 'new'
-    end
   end
 
   def destroy
