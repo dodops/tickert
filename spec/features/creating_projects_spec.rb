@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 feature 'Creating Projects' do
-  scenario 'can create a project' do
+  before do
+    sign_in_as!(FactoryGirl.create(:admin_user, password: "last", password_confirmation: "last"))
+    
     visit '/'
-
-    click_link 'New Project'
-
+    click_link "New Project"
+  end
+  scenario 'can create a project' do
     fill_in 'Name', with: 'TextMate 2'
     fill_in 'Description', with: 'A text-editor'
     click_button 'Create Project'
@@ -20,10 +22,6 @@ feature 'Creating Projects' do
   end
 
   scenario 'can not create a project' do
-    visit '/'
-
-    click_link 'New Project' 
-
     click_button 'Create Project'
 
     expect(page).to have_content('Project has not been created.')
