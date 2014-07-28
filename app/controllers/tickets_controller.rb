@@ -1,5 +1,6 @@
 class TicketsController < ApplicationController
   before_action :find_project
+  before_action :require_signin!, expect: [:index]
   before_action :find_ticket, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :handle_error
 
@@ -9,6 +10,7 @@ class TicketsController < ApplicationController
 
   def create
     @ticket = @project.tickets.build(ticket_params)
+    @ticket.user = current_user
     if @ticket.save
       flash[:notice] = "Ticket has been created."
       redirect_to [@project, @ticket]

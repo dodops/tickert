@@ -2,10 +2,21 @@ require 'rails_helper'
 
 feature "CreatingTickets", :type => :feature do
   before do
-    FactoryGirl.create(:project, name: "Internet Explorer", description: 'awful')
+    pro = FactoryGirl.create(:project, name: "Internet Explorer", description: 'awful')
+    user = FactoryGirl.create(:user, password: 'last', password_confirmation: 'last')
 
     visit '/'
-    click_link "Internet Explorer"
+    click_link pro.name
+    click_link "New Ticket"
+
+    message = "You need to sign in or sign up before continuing."
+    expect(page).to have_content(message)
+
+    fill_in "Name", with: user.name
+    fill_in "Password", with: user.password
+    click_button "Sign in"
+
+    click_link pro.name
     click_link "New Ticket"
   end
 
