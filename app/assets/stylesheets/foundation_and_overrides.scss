@@ -1319,4 +1319,7 @@ $sub-nav-active-cursor: default;
 // $range-slider-handle-bg-hover-color: scale-color($primary-color, $lightness: -12%);
 // $range-slider-handle-cursor: pointer;
 
-@import 'foundation';
+@import 
+  "foundation/components/global",
+  "foundation/components/grid",
+  "foundation/components/forms";
