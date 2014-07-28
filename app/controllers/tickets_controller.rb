@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   before_action :find_project
-  before_action :require_signin!, expect: [:index]
+  before_action :require_signin!, except: [:index]
   before_action :find_ticket, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :handle_error
 

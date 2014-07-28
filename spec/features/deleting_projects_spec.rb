@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 feature "DeletingProjects", :type => :feature do
+  before do
+    sign_in_as!(FactoryGirl.create(:admin_user))
+  end
   scenario 'deleting a project' do
     FactoryGirl.create(:project, name: 'Yadr', description: 'baby step')
 

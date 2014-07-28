@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :authorize_admin!, except: [:index, :show]
   before_action :find_project, only: [:show, :update, :edit, :destroy]
 
   def index	
@@ -48,6 +49,13 @@ class ProjectsController < ApplicationController
     flash[:notice] = "The project you were looking" +
       " for could not be found."
     redirect_to projects_path
+  end
+
+  def authorize_admin!
+    require_signin!
+    unless current_user.admin?
+      redirect_to root_path, notice: "You must be an admin to do that."
+    end 
   end
 
   def project_params

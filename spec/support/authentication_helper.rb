@@ -10,3 +10,11 @@ end
 
 
 RSpec.configure { |c| c.include AuthenticationHelpers, type: :feature }
+
+module AuthHelpers
+  def sign_in(user)
+    session[:user_id] = user.id
+  end
+end
+
+RSpec.configure { |c| c.include AuthHelpers, type: :controller }
