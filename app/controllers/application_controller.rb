@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :require_signin!
 
+  def authorize_admin!
+    require_signin!
+    redirect_to root_path, notice: "You must be an admin to do that." unless current_user.admin?
+  end
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end

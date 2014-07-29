@@ -51,13 +51,6 @@ class ProjectsController < ApplicationController
     redirect_to projects_path
   end
 
-  def authorize_admin!
-    require_signin!
-    unless current_user.admin?
-      redirect_to root_path, notice: "You must be an admin to do that."
-    end 
-  end
-
   def project_params
     params.require(:project).permit(:name, :description)
   end
