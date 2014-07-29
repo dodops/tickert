@@ -4,7 +4,7 @@ feature "EditingTickets", :type => :feature do
   let!(:project) { FactoryGirl.create(:project) }
   let!(:user) { FactoryGirl.create(:user, password: "kkkk", password_confirmation: "kkkk") }
   let!(:ticket) do
-    ticket = FactoryGirl.create(:ticket, project: project)
+    ticket = FactoryGirl.create(:ticket, project: project, title: "perfom" )
     ticket.update(user: user)
     ticket
   end
