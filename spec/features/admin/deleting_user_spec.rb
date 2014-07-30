@@ -17,4 +17,11 @@ feature 'Deleting users', type: :feature do
 
     expect(page).to have_content ("User has been deleted.")
   end
+
+  scenario "users cannot delete themselves" do
+    click_link admin.email
+    click_link "Delete user"
+    
+    expect(page).to have_content("You cannot delete yourself!")
+  end
 end
