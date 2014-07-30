@@ -40,6 +40,11 @@ class Admin::UsersController < Admin::BaseController
   def edit
   end
 
+  def destroy
+    @user.destroy
+    redirect_to admin_users_path, notice: "User has been deleted."
+  end
+
   private
 
   def set_user
