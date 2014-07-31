@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature "ViewingTickets", :type => :feature do
   before do
+    user = FactoryGirl.create(:user)
     textmate = FactoryGirl.create(:project, name: "TextMate", description: "some valid issue")
     scss = FactoryGirl.create(:project, name: "Vim", description: "best editor ever")
 
@@ -9,6 +10,10 @@ feature "ViewingTickets", :type => :feature do
                       project: textmate,
                       title: "Make it shiny",
                       description: "blablabla")
+
+    define_permission!(user, "view", textmate)
+    define_permission!(user, "view", scss)
+    sign_in_as!(user)
     visit '/'
   end
 

@@ -2,22 +2,27 @@ require 'rails_helper'
 
 feature "CreatingTickets", :type => :feature do
   before do
-    pro = FactoryGirl.create(:project, name: "Internet Explorer", description: 'awful')
-    user = FactoryGirl.create(:user, password: 'last', password_confirmation: 'last')
+    project = FactoryGirl.create(:project)
+    user = FactoryGirl.create(:user)
+    define_permission!(user, "view", project)
+    define_permission!(user, "create tickets", project)
+    define_permission!(user, "tag", project)
+    @email = user.email
+    sign_in_as!(user)
 
     visit '/'
-    click_link pro.name
+    click_link project.name
     click_link "New Ticket"
 
-    message = "You need to sign in or sign up before continuing."
-    expect(page).to have_content(message)
+    # message = "You need to sign in or sign up before continuing."
+    # expect(page).to have_content(message)
 
-    fill_in "Name", with: user.name
-    fill_in "Password", with: user.password
-    click_button "Sign in"
+    # fill_in "Name", with: user.name
+    # fill_in "Password", with: user.password
+    # click_button "Sign in"
 
-    click_link pro.name
-    click_link "New Ticket"
+    # click_link pro.name
+    # click_link "New Ticket"
   end
 
   scenario 'creating a ticket' do

@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe ProjectsController, :type => :controller do
   let(:user) { FactoryGirl.create(:user) }
 
+  before do
+    sign_in(user)
+  end
+
   context "standart users" do
   { new: :get,
     create: :post,
@@ -23,6 +27,14 @@ RSpec.describe ProjectsController, :type => :controller do
     expect(response).to redirect_to(projects_path)
     message = "The project you were looking for could not be found."
     expect(flash[:notice]).to eql(message)
+  end
+
+  it "cannot access the show action withou permission" do
+    project = FactoryGirl.create(:project)
+    get :show, id: project.id
+
+    expect(response).to redirect_to(projects_path)
+    expect(flash[:notice]).to eql("The project you were looking for could not be found.")
   end
 
 
