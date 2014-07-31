@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   before_action :find_project
-  before_action :require_signin!, except: [:index]
+  before_action :require_signin!
   before_action :find_ticket, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :handle_error
 
@@ -45,8 +45,8 @@ class TicketsController < ApplicationController
   private
   
   def handle_error
-    flash[:notice] = "Could not be found."
-    redirect_to projects_path
+    flash[:notice] = "The project you were looking for could not be found."
+    redirect_to root_path
   end
 
   def ticket_params
@@ -58,6 +58,6 @@ class TicketsController < ApplicationController
   end
 
   def find_project
-    @project = Project.find(params[:project_id])
+    @project = Project.for(current_user).find(params[:project_id])
   end
 end
