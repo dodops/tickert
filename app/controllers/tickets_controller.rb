@@ -3,6 +3,7 @@ class TicketsController < ApplicationController
   before_action :require_signin!
   before_action :find_ticket, only: [:show, :edit, :update, :destroy]
   before_filter :authorize_create!, only: [:new, :create]
+  before_action :authorize_update!, only: [:edit, :update]
   rescue_from ActiveRecord::RecordNotFound, with: :handle_error
 
   def new
@@ -44,7 +45,11 @@ class TicketsController < ApplicationController
   end
 
   private
-  
+  def authorize_update!
+    if !current_user.admin? && cannot?("edit tickets".to_sym, @project)
+      redirect_to @project, notice: "You cannot edit tickets on this project."
+    end
+  end
   def handle_error
     flash[:notice] = "The project you were looking for could not be found."
     redirect_to root_path
