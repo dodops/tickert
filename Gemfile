@@ -26,3 +26,5 @@ group :test, :development do
 end
 
 gem 'bcrypt-ruby'
+
+gem 'cancan'
