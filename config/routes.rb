@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     root "base#index"
     resources :users do 
       resources :permissions
+
+      put "permissions", to: "permissions#set", as: "set_permissions"
     end
   end
 
