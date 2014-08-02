@@ -1,6 +1,8 @@
 <div>
   <h2><%= @ticket.title %></h2>
   <%= simple_format(@ticket.description) %>
-  <%= link_to "Delete Ticket ", [@project, @ticket], method: :delete %>
-  <%= link_to "Edit Ticket", edit_project_ticket_path(@project, @ticket) %>
+  <% authorized?("edit tickets", @project) do %>
+    <%= link_to "Delete Ticket ", [@project, @ticket], method: :delete %>
+    <%= link_to "Edit Ticket", edit_project_ticket_path(@project, @ticket) %>
+  <% end %>
 </div>
