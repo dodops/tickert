@@ -1,2 +1,2 @@
-class Admin::PermissionsController < ApplicationController
+class Admin::PermissionsController < Admin::BaseController
 end
