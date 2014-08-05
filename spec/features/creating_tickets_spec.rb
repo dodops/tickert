@@ -45,7 +45,7 @@ feature "CreatingTickets", :type => :feature do
   scenario "creating a ticket with an attachment" do
     fill_in "Title", with: "Add documentation for a blink tag"
     fill_in "Description", with: "the blink tag has a speed attribute."
-    attach_file "File", "spec/fixtures/speed.txt"
+    attach_file "File #1", Rails.root.join("spec/fixtures/speed.txt")
     click_button "Create Ticket"
 
     expect(page).to have_content("Ticket has been created.")
