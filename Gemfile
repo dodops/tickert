@@ -28,3 +28,4 @@ end
 gem 'bcrypt-ruby'
 
 gem 'cancan'
+gem 'carrierwave'
