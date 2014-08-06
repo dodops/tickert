@@ -23,9 +23,9 @@ RSpec.describe TicketsController, :type => :controller do
     end
 
     def cannot_create_tickets!
-      response.should redirect_to(project)
+      expect(response).to redirect_to(project)
       message = "You cannot create tickets on this project."
-      flash[:notice].should eql(message)
+      expect(flash[:notice]).to eql(message)
     end
 
     def cannot_update_tickets!
