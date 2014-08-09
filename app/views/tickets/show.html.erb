@@ -17,3 +17,14 @@
   <%= link_to "Delete Ticket ", [@project, @ticket], method: :delete %>
   <%= link_to "Edit Ticket", edit_project_ticket_path(@project, @ticket) %>
 <% end %>
+<h4>Comments:</h4>
+<div>
+  <% if @ticket.comments.exists? %>
+    <%= render @ticket.comments.select(&:persisted?) %>
+  <% else %>
+    There are no comments for this ticket.
+  <% end %>
+</div>
+<div>
+  <%= render "comments/form" %>
+</div>

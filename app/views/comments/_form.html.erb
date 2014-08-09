@@ -1,0 +1,18 @@
+<strong>New Comment</strong>
+<%= form_for [@ticket, @comment] do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <%= pluralize(@comment.errors.count, "error") %> from being saved:
+      <ul>
+        <% @comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+  <%= f.label :text %>
+  <%= f.text_area :text %>
+  </p>
+  <%= f.submit "Create comment" %>
+<% end %>
